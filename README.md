@@ -95,3 +95,38 @@ perlmutter:login15>$ which conda
 perlmutter:login15>$ conda --version
 conda 23.9.0
 ```
+## Creating a Conda Virtual Environment
+You want to create a virtual envrionment with a python version 3.10 for Generative AI Practices.
+```
+[glogin01]$ conda create -n genai python=3.10
+Retrieving notices: ...working... done
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /scratch/qualis/miniconda3/envs/genai
+
+  added / updated specs:
+    - python=3.10
+.
+.
+.
+Proceed ([y]/n)? y    <========== type yes 
+
+
+Downloading and Extracting Packages:
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#     $ conda activate genai
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+```
+
