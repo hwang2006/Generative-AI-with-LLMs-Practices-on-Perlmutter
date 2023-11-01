@@ -5,6 +5,7 @@ This repository is intended to share Generative AI with Large Language Models (L
 * [NERSC Perlmutter Supercomputer](#nersc-perlmutter-supercomputer)
 * [Installing Conda](#installing-conda)
 * [Creating a Conda Virtual Environment](#creating-a-conda-virtual-environment)
+* [Running Jupyter](#running-jupyter)
 
 
 ## NERSC Perlmutter Supercomputer
