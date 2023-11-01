@@ -172,8 +172,8 @@ perlmutter:login15>$ cat jupyter_run.sh
 #SBATCH -q regular
 #SBATCH -t 8:00:00
 #SBATCH -N 1
-#SBATCH --ntasks-per-node=4
-#SBATCH --gpus-per-node=4
+#SBATCH --ntasks-per-node=1
+#SBATCH --gpus-per-node=1
 #SBATCH -c 32
 
 export SLURM_CPU_BIND="cores"
@@ -201,19 +201,19 @@ module load  cudnn/8.7.0  nccl/2.15.5-ofi  evp-patch
 
 echo "execute jupyter"
 source ~/.bashrc
-conda activate horovod
-#cd $SCRATCH/ddl-projects #Root/Working directory of jupyter server
-cd $SCRATCH  #Root/Working directory of jupyter server
+conda activate genai
+#cd $SCRATCH/ddl-projects #Root/Working directory for the jupyter notebook server
+cd $SCRATCH  #Root/Working directory of the jupyter notebook server
 jupyter lab --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token=${USER}
 #bash -c "jupyter lab --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token='${USER}'"
 echo "end of the job"
 ```
-- to launch a jupyter notebook server 
+- to submit and launch a jupyter notebook server on a worker node
 ```
 perlmutter:login15>$ sbatch jupyter_run.sh
 Submitted batch job 5494200
 ```
-- to check if a jupyter notebook server is running
+- to check if the jupyter notebook server is up and running
 ```
 perlmutter:login15>$ squeue -u $USER
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
