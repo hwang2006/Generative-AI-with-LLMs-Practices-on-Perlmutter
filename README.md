@@ -86,4 +86,12 @@ conda config --set auto_activate_base false
 
 Thank you for installing Miniconda3!
 ```
-
+3. finalize installing Miniconda with environment variables set including conda path.
+```
+perlmutter:login15>$ source ~/.bashrc    # set conda path and environment variables 
+perlmutter:login15>$ conda config --set auto_activate_base false
+perlmutter:login15>$ which conda
+/pscratch/sd/s/elvis/miniconda3/condabin/conda
+perlmutter:login15>$ conda --version
+conda 23.9.0
+```
