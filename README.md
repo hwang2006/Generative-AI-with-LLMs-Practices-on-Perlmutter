@@ -249,7 +249,7 @@ Password:
 <p align="center"><img src="https://user-images.githubusercontent.com/84169368/218938419-f38c356b-e682-4b1c-9add-6cfc29d53425.png"/></p> 
 
 ## Building a Shifter Container Image
-You can build your a singularity container image for Generativ AI.
+You can build your docker image for Generativ AI practices.
 ```
 # edit a Dockerfile
 C:\Users\elvis> cat Dockerfile
