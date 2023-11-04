@@ -247,3 +247,38 @@ Password:
 - Password or token: elvis   # your username on Perlmutter
 ```
 <p align="center"><img src="https://user-images.githubusercontent.com/84169368/218938419-f38c356b-e682-4b1c-9add-6cfc29d53425.png"/></p> 
+
+## Building a Shifter Container Image
+You can build your a singularity container image for Generativ AI.
+```
+# edit a Dockerfile
+C:\Users\elvis> cat Dockerfile
+FROM nvcr.io/nvidia/pytorch:22.09-py3
+
+#install miniconda
+#pin to python 3.8 for rapids compatibility
+#https://repo.anaconda.com/miniconda/Miniconda3-py310_23.9.0-0-Linux-x86_64.sh
+ENV installer=Miniconda3-py310_23.9.0-0-Linux-x86_64.sh
+
+RUN wget https://repo.anaconda.com/miniconda/$installer && \
+    /bin/bash $installer -b -p /opt/miniconda3          && \
+    rm -rf $installer
+
+ENV PATH=/opt/miniconda3/bin:$PATH
+
+RUN \
+    conda install jupyter chardet cchardet -y                   && \
+    conda install -c conda-forge jupytext -y                    && \
+    pip install jupyter-tensorboard ipykernel                   && \
+    pip install torch==1.13.0 torchdata transformers datasets   && \
+    pip install evaluate rouge_score loralib peft               && \
+    pip install git+https://github.com/lvwerra/trl.git@25fa1bd
+
+# build a docker image
+C:\Users\elvis> docker build -t qualis2006/genai-pytorch-22.09-py3 .
+
+# list docker images
+C:\Users\elvis> docker images
+REPOSITORY                                      TAG       IMAGE ID       CREATED         SIZE
+qualis2006/genai-pytorch-22.09-py3              latest    c4afb5c76399   9 minutes ago   22.9GB
+```
