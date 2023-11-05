@@ -250,8 +250,8 @@ Password:
 
 ## Building a Shifter Container Image
 You can build your docker image for Generativ AI practices. NERSC currently does not provide users with a platform to create their own Docker containers. Consequently, you are required to construct your images on your personal systems (e.g., PC or Laptop) before transferring them to NERSC. Please refer to the [Shifter for Beginner Tutorial](https://docs.nersc.gov/development/shifter/shifter-tutorial/#push-your-docker-image-to-the-docker-hub-registry) for more detailed information. 
+- edit a Dockerfile. 
 ```
-# edit a Dockerfile
 C:\Users\elvis> cat Dockerfile
 FROM nvcr.io/nvidia/pytorch:22.09-py3
 
@@ -273,12 +273,22 @@ RUN \
     pip install torch==1.13.0 torchdata transformers datasets   && \
     pip install evaluate rouge_score loralib peft               && \
     pip install git+https://github.com/lvwerra/trl.git@25fa1bd
-
-# build a docker image
+```
+- build a docker image
+```
 C:\Users\elvis> docker build -t qualis2006/genai-pytorch-22.09-py3 .
-
-# list docker images
+```
+- list docker images
+```
 C:\Users\elvis> docker images
 REPOSITORY                                      TAG       IMAGE ID       CREATED         SIZE
 qualis2006/genai-pytorch-22.09-py3              latest    c4afb5c76399   9 minutes ago   22.9GB
+```
+- push your Docker image to the Docker Hub registry. You'll have to access the Docker public registry by using docker login, where you'll be prompted to enter your username and password.
+```
+# log in to the Docker Hub
+C:\Users\elvis> docker login
+
+# push your image to the Docker Hub
+C:\Users\elvis> docker push qualis2006/genai-pytorch-22.09-py3:latest
 ```
