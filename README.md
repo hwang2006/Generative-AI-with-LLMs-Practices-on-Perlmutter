@@ -7,8 +7,10 @@ This repository is intended to share Generative AI with Large Language Models (L
 * [Creating a Conda Virtual Environment](#creating-a-conda-virtual-environment)
 * [Running Jupyter](#running-jupyter)
 * [Building a Shifter Container Image](#building-a-shifter-container-image)
+* [Running Jupyter with a Shifter Container Image for Generative AI Practices](#running-jupyter-with-a- shifter-container-image-for-generative-ai-practices)
+* [Reference](#reference)
 
-
+ 
 ## NERSC Perlmutter Supercomputer
 [Perlmutter](https://docs.nersc.gov/systems/perlmutter/), located at [NERSC](https://www.nersc.gov/) in [Lawrence Berkeley National Laboratory](https://www.lbl.gov/), is a HPE Cray EX supercomputer with ~1,500 AMD Milan CPU nodes and ~6000 Nvidia A100 GPUs (4 GPUs per node). It debuted as the world 5th fastest supercomputer in the Top500 list in June 2021. Please refer to [Perlmutter Architecture](https://docs.nersc.gov/systems/perlmutter/architecture/) for the architecutural details of Perlmutter including system specifications, system performance, node specifications and interconnect. [Slurm](https://slurm.schedmd.com/) is adopted for cluster/resource management and job scheduling. 
 
@@ -364,6 +366,49 @@ perlmutter:login15>$ squeue -u $USER
            xxxxxxx shared_gp jupyter_  swhwang  R       0:10      1 (Priority)
 
 ```
+## #!/bin/bash
+#SBATCH --image=qualis2006/genai-pytorch-22.09-py3:latest
+#SBATCH -A dasrepo_g
+#SBATCH -C gpu
+##SBATCH -q regular
+#SBATCH -q shared
+#SBATCH -t 8:00:00
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --gpus-per-node=1
+#SBATCH -c 32
 
-## Reference
+export SLURM_CPU_BIND="cores"
+
+#removing the old port forwading
+if [ -e port_forwarding_command ]
+then
+  rm port_forwarding_command
+fi
+
+#getting the node name and port
+SERVER="`hostname`"
+PORT_JU=$(($RANDOM + 10000 )) # random number greaten than 10000
+
+echo $SERVER
+echo $PORT_JU
+
+echo "ssh -L localhost:8888:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov" > port_forwarding_command
+echo "ssh -L localhost:8888:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov"
+#echo "ssh -L localhost:${PORT_JU}:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov" > port_forwarding_command
+#echo "ssh -L localhost:${PORT_JU}:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov"
+
+echo "load module-environment"
+module load  cudnn/8.7.0  nccl/2.15.5-ofi  evp-patch
+
+echo "execute jupyter"
+source ~/.bashrc
+#conda activate genai
+#cd $SCRATCH/ddl-projects #Root/Working directory for the jupyter notebook server
+cd $SCRATCH  #Root/Working directory for the jupyter notebook server
+shifter --module=gpu jupyter lab --no-browser --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token=${USER}
+#bash -c "jupyter lab --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token='${USER}'"
+echo "end of the job"
+
+# Reference
 [[DeepLearning.AI Online Course] Generative AI with Large Language Models](https://www.coursera.org/learn/generative-ai-with-llms)  
