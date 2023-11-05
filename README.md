@@ -171,7 +171,7 @@ Available kernels:
 ```
 perlmutter:login15>$ cat jupyter_run.sh
 #!/bin/bash
-#SBATCH -A dasrepo_g
+#SBATCH -A m1234_g
 #SBATCH -C gpu
 #SBATCH -q regular
 #SBATCH -t 8:00:00
@@ -312,7 +312,7 @@ You can launch a Jupyter notebook server using the GenAI container image by subm
 perlmutter:login15>$  cat jupyter_run_shifter.sh
 #!/bin/bash
 #SBATCH --image=qualis2006/genai-pytorch-22.09-py3:latest
-#SBATCH -A dasrepo_g
+#SBATCH -A m1234_g
 #SBATCH -C gpu
 ##SBATCH -q regular
 #SBATCH -q shared
