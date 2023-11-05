@@ -261,7 +261,7 @@ C:\Users\elvis> cat Dockerfile
 FROM nvcr.io/nvidia/pytorch:22.09-py3
 
 #install miniconda
-#pin to python 3.8 for rapids compatibility
+#pin to python 3.10 for rapids compatibility
 #https://repo.anaconda.com/miniconda/Miniconda3-py310_23.9.0-0-Linux-x86_64.sh
 ENV installer=Miniconda3-py310_23.9.0-0-Linux-x86_64.sh
 
