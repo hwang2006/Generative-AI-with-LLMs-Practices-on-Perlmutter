@@ -41,7 +41,7 @@ perlmutter:login15>$ wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Li
 perlmutter:login15>$ cd $SCRATCH
 perlmutter:login15>$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
-2. Install Miniconda. By default conda will be installed in your home directory, which has a limited disk space. Please refer to [File System Overview](https://docs.nersc.gov/filesystems/) for more details of NERSC storage systems . You will install it on the /global/common/software/&lt;myproject&gt; directory and then create a conda virtual environment on your own scratch directory. 
+2. Install Miniconda. By default conda will be installed in your home directory, which has a limited disk space. Please refer to [File System Overview](https://docs.nersc.gov/filesystems/) for more details of NERSC storage systems . You will install it on your scratch directory (/pscratch/sd/s/elvis) and then create a conda virtual environment there. 
 ```
 perlmutter:login15>$ chmod 755 Miniconda3-latest-Linux-x86_64.sh
 perlmutter:login15>$ ./Miniconda3-latest-Linux-x86_64.sh
@@ -65,15 +65,15 @@ Miniconda3 will now be installed into this location:
   - Press CTRL-C to abort the installation
   - Or specify a different location below
 
-[/global/homes/s/swhwang/miniconda3] >>> /global/common/software/ddlproj/elvis/miniconda3  <======== type /global/common/software/myproject/$USER/miniconda3 here
-PREFIX=/global/common/software/dasrepo/swhwang/miniconda3
+[/global/homes/s/swhwang/miniconda3] >>> /pscratch/sd/s/elvis/miniconda3  <======== type /pscratch/sd/s/elvis/miniconda3 or $SCRATCH/miniconda3 here
+PREFIX=/pscratch/sd/s/elvis/miniconda3
 Unpacking payload ...
 Collecting package metadata (current_repodata.json): done
 Solving environment: done
 
 ## Package Plan ##
 
-  environment location: /global/common/software/ddlproj/elvis/miniconda3
+  environment location: /pscratch/sd/s/elvis/miniconda3
 .
 .
 .
@@ -112,7 +112,7 @@ Solving environment: done
 
 ## Package Plan ##
 
-  environment location: /scratch/qualis/miniconda3/envs/genai
+  environment location: /pscratch/sd/s/elvis/miniconda3/envs/genai
 
   added / updated specs:
     - python=3.10
