@@ -309,7 +309,7 @@ perlmutter docker     READY    8002b54070   2023-11-05T00:42:30 qualis2006/genai
 You can launch a Jupyter notebook server using the GenAI container image by submitting and running it on a compute node. You can then access it through the SSH tunneling mechanizm by opening a browser on your PC or labtop. Please be aware that with the Shifter container image, there is no need to install the Miniconda3 on your scratch directory and build the conda virtual environment for Generative AI practices. 
 - create a batch script for launching a jupyter notebook server:
 ```
-perlmutter:login15>$  cat jupyter_run_sfitfer.sh
+perlmutter:login15>$  cat jupyter_run_shifter.sh
 #!/bin/bash
 #SBATCH --image=qualis2006/genai-pytorch-22.09-py3:latest
 #SBATCH -A dasrepo_g
