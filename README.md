@@ -359,7 +359,7 @@ echo "end of the job"
 perlmutter:login15>$ sbatch jupyter_run_shifter.sh
 Submitted batch job XXXXXX
 ```
-- check if the jupyter notebook server is up and running
+- check if the jupyter notebook server is up and running:
 ```
 perlmutter:login15>$ squeue -u $USER
              JOBID       PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
