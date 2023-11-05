@@ -7,7 +7,7 @@ This repository is intended to share Generative AI with Large Language Models (L
 * [Creating a Conda Virtual Environment](#creating-a-conda-virtual-environment)
 * [Running Jupyter](#running-jupyter)
 * [Building a GenAI Shifter Container Image](#building-a-genai-shifter-container-image)
-* [Running Jupyter with a Shifter Container for Generative AI Practices](#running-jupyter-with-a-shifter-container-for-generative-ai-practices)
+* [Running Jupyter with the Shifter Container for Generative AI Practices](#running-jupyter-with-the-shifter-container-for-generative-ai-practices)
 * [Reference](#reference)
 
  
@@ -305,7 +305,7 @@ perlmutter:login15>$ shifterimg images | grep qualis2006
 perlmutter docker     READY    8002b54070   2023-11-05T00:42:30 qualis2006/genai-pytorch-22.09-py3:latest
 ```
 
-## Running Jupyter with a Shifter Container for Generative AI Practices
+## Running Jupyter with the Shifter Container for Generative AI Practices
 You can launch a Jupyter notebook server using the GenAI container image by submitting and running it on a compute node. You can then access it through the SSH tunneling mechanizm by opening a browser on your PC or labtop. Please be aware that with the Shifter container image, there is no need to install the Miniconda3 on your scratch directory and build the conda virtual environment for Generative AI practices. 
 - create a batch script for launching a jupyter notebook server:
 ```
