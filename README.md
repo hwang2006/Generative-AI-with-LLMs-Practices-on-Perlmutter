@@ -203,7 +203,7 @@ module load  cudnn/8.7.0  nccl/2.15.5-ofi  evp-patch
 
 echo "execute jupyter"
 source ~/.bashrc
-conda activate genai
+#conda activate genai
 #cd $SCRATCH/ddl-projects #Root/Working directory for the jupyter notebook server
 cd $SCRATCH  #Root/Working directory of the jupyter notebook server
 jupyter lab --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token=${USER}
@@ -219,10 +219,10 @@ Submitted batch job 5494200
 ```
 perlmutter:login15>$ squeue -u $USER
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-           5494200  gpu_ss11 jupyter_  swhwan PD       0:00      1 (Priority)
+            5494200  gpu_ss11 jupyter_   elvis PD       0:00      1 (Priority)
 perlmutter:login15>$ squeue -u $USER
              JOBID       PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
-            5494200       gpu_ss11  jupyter_    evlis  RUNNING       0:02   8:00:00      1 nid001140
+            5494200       gpu_ss11  jupyter_    elvis  RUNNING       0:02   8:00:00      1 nid001140
 perlmutter:login15>$ cat slurm-XXXXXX.out
 .
 .
@@ -302,3 +302,68 @@ perlmutter:login15>$ shifterimg pull qualis2006/genai-pytorch-22.09-py3:latest
 perlmutter:login15>$ shifterimg images | grep qualis2006
 perlmutter docker     READY    8002b54070   2023-11-05T00:42:30 qualis2006/genai-pytorch-22.09-py3:latest
 ```
+
+## Running Jupyter with a Shifter Container Image for Generative AI Practices
+You can launch a Jupyter notebook server using the GenAI container image by submitting and running it on a compute node. You can then access it through the SSH tunneling mechanizm by opening a browser on your PC or labtop. Please be aware that with the Shifter container image, there is no need to install the Miniconda3 on your scratch directory and build the conda virtual environment for Generative AI practices. 
+- create a batch script for launching a jupyter notebook server:
+```
+perlmutter:login15>$  cat jupyter_run_sfitfer.sh
+#!/bin/bash
+#SBATCH --image=qualis2006/genai-pytorch-22.09-py3:latest
+#SBATCH -A dasrepo_g
+#SBATCH -C gpu
+##SBATCH -q regular
+#SBATCH -q shared
+#SBATCH -t 8:00:00
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --gpus-per-node=1
+#SBATCH -c 32
+
+export SLURM_CPU_BIND="cores"
+
+#removing the old port forwading
+if [ -e port_forwarding_command ]
+then
+  rm port_forwarding_command
+fi
+
+#getting the node name and port
+SERVER="`hostname`"
+PORT_JU=$(($RANDOM + 10000 )) # random number greaten than 10000
+
+echo $SERVER
+echo $PORT_JU
+
+echo "ssh -L localhost:8888:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov" > port_forwarding_command
+echo "ssh -L localhost:8888:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov"
+#echo "ssh -L localhost:${PORT_JU}:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov" > port_forwarding_command
+#echo "ssh -L localhost:${PORT_JU}:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov"
+
+echo "load module-environment"
+module load  cudnn/8.7.0  nccl/2.15.5-ofi  evp-patch
+
+echo "execute jupyter"
+source ~/.bashrc
+#conda activate genai
+#cd $SCRATCH/ddl-projects #Root/Working directory for the jupyter notebook server
+cd $SCRATCH  #Root/Working directory for the jupyter notebook server
+shifter --module=gpu jupyter lab --no-browser --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token=${USER}
+#bash -c "jupyter lab --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token='${USER}'"
+echo "end of the job"
+```
+- launch a jupyter notebook server by submitting the batch script to a worker node:
+```
+perlmutter:login15>$ sbatch jupyter_run_shifter.sh
+Submitted batch job XXXXXX
+```
+- check if the jupyter notebook server is up and running
+```
+perlmutter:login15>$ squeue -u $USER
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           xxxxxxx shared_gp jupyter_  swhwang  R       0:10      1 (Priority)
+
+```
+
+## Reference
+[[DeepLearning.AI Online Course] Generative AI with Large Language Models](https://www.coursera.org/learn/generative-ai-with-llms)  
