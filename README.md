@@ -364,8 +364,8 @@ Submitted batch job XXXXXX
 - check if the jupyter notebook server is up and running:
 ```
 perlmutter:login15>$ squeue -u $USER
-             JOBID       PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
-            XXXXXXX     shared_gp  jupyter_    elvis  RUNNING       0:02   8:00:00      1 nid001140
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          XXXXXXXX shared_gp jupyter_    elvis  R   00:00:10      1 nid001512
 ```
 ## Reference
 [[DeepLearning.AI Online Course] Generative AI with Large Language Models](https://www.coursera.org/learn/generative-ai-with-llms)  
