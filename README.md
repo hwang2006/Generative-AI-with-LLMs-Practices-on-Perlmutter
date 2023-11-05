@@ -294,6 +294,10 @@ C:\Users\elvis> docker push qualis2006/genai-pytorch-22.09-py3:latest
 ```
 - pull your Docker image onto NERSC via Shifter. Shifter is configured to retrieve images directly from Docker Hub using the shifterimg pull command, which seamlessly converts your Docker image into the Shifter format:
 ```
-# Note that you are on a login node on Perlmutter.
+# note that you are on a login node on Perlmutter.
 perlmutter:login15>$ shifterimg pull qualis2006/genai-pytorch-22.09-py3:latest
+
+# make sure that your image is pulled successfully at NERSC
+perlmutter:login15>$ shifterimg images | grep qualis2006
+perlmutter docker     READY    8002b54070   2023-11-05T00:42:30 qualis2006/genai-pytorch-22.09-py3:latest
 ```
