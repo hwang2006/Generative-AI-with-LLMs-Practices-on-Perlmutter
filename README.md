@@ -249,7 +249,7 @@ Password:
 <p align="center"><img src="https://user-images.githubusercontent.com/84169368/218938419-f38c356b-e682-4b1c-9add-6cfc29d53425.png"/></p> 
 
 ## Building a Shifter Container Image
-You can build your docker image for Generativ AI practices.
+You can build your docker image for Generativ AI practices. NERSC currently does not provide users with a platform to create their own Docker containers. Consequently, you are required to construct your images on your personal systems (e.g., PC or Laptop) before transferring them to NERSC. Please refer to the [Shifter for Beginner Tutorial](https://docs.nersc.gov/development/shifter/shifter-tutorial/#push-your-docker-image-to-the-docker-hub-registry) for more detailed information. 
 ```
 # edit a Dockerfile
 C:\Users\elvis> cat Dockerfile
