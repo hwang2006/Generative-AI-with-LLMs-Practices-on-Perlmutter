@@ -30,8 +30,8 @@ echo "ssh -L localhost:8888:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov
 #echo "ssh -L localhost:${PORT_JU}:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov" > port_forwarding_command
 #echo "ssh -L localhost:${PORT_JU}:${SERVER}:${PORT_JU} ${USER}@perlmutter-p1.nersc.gov"
 
-echo "load module-environment"
-module load  cudnn/8.7.0  nccl/2.15.5-ofi  evp-patch
+#echo "load module-environment"
+#module load  cudnn/8.7.0  nccl/2.15.5-ofi  evp-patch
 
 echo "execute jupyter"
 source ~/.bashrc
