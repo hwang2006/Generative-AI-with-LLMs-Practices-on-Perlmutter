@@ -10,6 +10,7 @@ This repository is intended to share Generative AI with Large Language Models (L
 * [Running Jupyter](#running-jupyter)
 * [Building a GenAI Shifter Container Image](#building-a-genai-shifter-container-image)
 * [Running Jupyter with the Shifter Container for Generative AI Practices](#running-jupyter-with-the-shifter-container-for-generative-ai-practices)
+* [Lab Excecises](#lab-exercises)
 * [Reference](#reference)
 
  
@@ -367,5 +368,8 @@ perlmutter:login15>$ squeue -u $USER
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           XXXXXXXX shared_gp jupyter_    elvis  R   00:00:10      1 nid001512
 ```
+## Lab Exercises
+Now, you are ready to do Generative AI with LLMs practices. After cloing this GitHub repository on your scratch directory (e.g., /scratch/$USER), you should able to see the the lab exercised files through the Jupyter Notebook interface that you have launced. You could start with Lab_1_summarize_dialogue.ipynb just by clickihng it that covers prompt engineering exercises.
+
 ## Reference
 [[DeepLearning.AI Online Course] Generative AI with Large Language Models](https://www.coursera.org/learn/generative-ai-with-llms)  
